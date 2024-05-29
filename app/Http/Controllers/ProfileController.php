@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -30,6 +31,14 @@ class ProfileController extends Controller
 
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;
+        }
+
+        // in case they want to change the file we delete the previous file and the update the profile image with the new file
+        $profilePath = '';
+        if($request->hasFile('profile_image')){
+            Storage::disk('public')->delete($request->user()->profile_image);
+            $profilePath = $request->file('profile_image')->store('profile_image', 'public');
+            $request->user()->profile_image = $profilePath;
         }
 
         $request->user()->save();

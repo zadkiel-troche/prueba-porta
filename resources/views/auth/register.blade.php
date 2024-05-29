@@ -1,9 +1,16 @@
 <x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
+    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
         @csrf
 
+        <!-- Profile Image -->
+        <div class="center">
+            <x-input-label for="image" :value="__('Profile Image')" />
+            <x-text-input id="image" class="block mt-1 w-full" type="file" accept="image/*" name="profile_image" required />
+            <x-input-error :messages="$errors->get('profile_image')" class="mt-2" />
+        </div>
+
         <!-- Name -->
-        <div>
+        <div class="mt-4">
             <x-input-label for="name" :value="__('Name')" />
             <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
@@ -18,9 +25,9 @@
 
         <!-- Phone Number -->
         <div class="mt-4">
-            <x-input-label for="phone" :value="__('Phone Number')" />
-            <x-text-input id="phone" class="block mt-1 w-full" type="number" name="phone" :value="old('phone')" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('phone')" class="mt-2" />
+            <x-input-label for="phone_number" :value="__('Phone Number')" />
+            <x-text-input id="phone_number" class="block mt-1 w-full" type="text" name="phone_number" :value="old('phone_number')" required autocomplete="phone_number" />
+            <x-input-error :messages="$errors->get('phone_number')" class="mt-2" />
         </div>
 
         <!-- Password -->
