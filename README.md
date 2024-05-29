@@ -2,4 +2,10 @@
 
 ## Sobre el proyecto
 
-Prueba técnica para backend de Laravel
+Prueba técnica para backend de Laravel.
+
+Para el proyecto utilicé lo siguiente:
+
+-   Laravel v11
+-   PHP v8.2
+-   Laravel Breeze para el manejo de la sesion
